@@ -1,6 +1,6 @@
 // netlify/functions/getEmailLogs.js
 
-import emailHistory from '../../Models/emailHistory.js';
+import emailHistory from '../../model/emailHistory.js';
 import { connect, disconnect } from './lib/db.js';
 
 import jwtVerify from './lib/middleware/jwtVerify.js';

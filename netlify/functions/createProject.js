@@ -1,7 +1,7 @@
 // netlify/functions/createProject.js
 
 import { connect, disconnect } from './lib/db.js';
-import Country from '../../Models/projects.js';
+import Country from '../../model/projects.js';
 import EmailHistory from '../../Models/emailHistory.js';
 import s3Uploader from './lib/utils/s3Uploader.js';
 import companyEmailSender from './lib/utils/companyEmailSender.js';

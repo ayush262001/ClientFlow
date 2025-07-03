@@ -1,7 +1,7 @@
 // netlify/functions/editMilestone.js
 
 import { connect, disconnect } from './lib/db.js';
-import Country from '../../Models/projects.js';
+import Country from '../../model/projects.js';
 
 import jwtVerify from './lib/middleware/jwtVerify.js';
 

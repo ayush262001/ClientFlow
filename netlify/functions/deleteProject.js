@@ -1,7 +1,7 @@
 // netlify/functions/deleteProject.js
 
 import { connect, disconnect } from './lib/db.js';
-import Country from '../../Models/projects.js';
+import Country from '../../model/projects.js';
 import s3Deleter from './lib/utils/s3Deleter.js';
 import { deleteEmailHistoryByProject } from './lib/utils/deleteAllEmailsForAProject.js';
 

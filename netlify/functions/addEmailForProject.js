@@ -1,6 +1,6 @@
 import { connect, disconnect } from './lib/db';
-import emailHistory from '../../Models/emailHistory.js';
-import Country from '../../Models/projects.js';
+import emailHistory from '../../model/emailHistory.js';
+import Country from '../../model/projects.js';
 import s3Uploader from './lib/utils/s3Uploader.js';
 import s3Deleter from './lib/utils/s3Deleter.js';
 import dynamicSMTPMailer from './lib/utils/dynamicSMTPmailer.js';

@@ -1,7 +1,7 @@
 // utils/email/deleteEmailHistoryByProject.js
 
-import emailHistory from '../../Models/EmailHistory/emailHistory.js';
-import Country from '../../Models/Project/projects.js';
+import emailHistory from '../../model/EmailHistory/emailHistory.js';
+import Country from '../../model/Project/projects.js';
 import { connect, disconnect } from '../../config/Db.js';
 
 /**

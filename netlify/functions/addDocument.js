@@ -1,7 +1,7 @@
 // netlify/functions/addDocument.js
 
 import { connect, disconnect } from '../../config/Db.js';
-import Country from '../../Models/Project/projects.js';
+import Country from '../../model/Project/projects.js';
 import s3Uploader from './lib/utils/s3Uploader.js';
 import AWS from 'aws-sdk';
 import Busboy from 'busboy';
