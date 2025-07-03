@@ -12,6 +12,6 @@ const emailHistroy = new mongoose.Schema({
     emails : {type: [emailSchema]}
 })
 
-const emailHistoryModel = mongoose.model('emailHistroy', emailHistroy);
+const emailHistoryModel = mongoose.model('emailHistory', emailHistroy);
 
 module.exports = emailHistoryModel;
