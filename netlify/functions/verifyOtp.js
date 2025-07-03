@@ -1,5 +1,5 @@
-import userModel from '../../model/user';
-import { connect, disconnect } from './lib/db';
+import userModel from '../../model/user.js';
+import { connect, disconnect } from './lib/db.js';
 import validOtp from './lib/utils/validOtp.js';
 
 export async function handler(event) {
@@ -41,14 +41,22 @@ export async function handler(event) {
       };
     }
 
-    await userModel.findByIdAndUpdate(uuid, {
-      $set: { payment_verified: true },
-      $unset: { OTP: '' }
-    });
+    // Update payment_verified and remove OTP, return updated user
+    const updatedUser = await userModel.findByIdAndUpdate(
+      uuid,
+      {
+        $set: { payment_verified: true },
+        $unset: { OTP: '' }
+      },
+      { new: true } // return updated document
+    ).select('-OTP -__v'); // exclude OTP and version key
 
     return {
       statusCode: 201,
-      body: JSON.stringify({ message: 'OTP verified successfully' })
+      body: JSON.stringify({
+        message: 'OTP verified successfully',
+        user: updatedUser
+      })
     };
   } catch (err) {
     console.error('OTP Verification Error:', err.message);
