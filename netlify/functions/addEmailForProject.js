@@ -11,9 +11,9 @@ import AWS from 'aws-sdk';
 import multipartParser from './lib/utils/multipartParser.js'; // You must implement or install one like 'lambda-multipart-parser'
 
 const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  region: process.env.REGION
 });
 
 async function rawhandler(event) {
