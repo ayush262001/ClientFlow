@@ -1,11 +1,10 @@
 [build]
+  command = "npm run build"
+  publish = ".next"
   functions = "netlify/functions"
-  publish = "public"
 
-[dev]
-  functions = "netlify/functions"
-  framework = "#custom"
-  targetPort = 3000 # or whatever port your dev server runs on
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [[redirects]]
   from = "/api/*"
