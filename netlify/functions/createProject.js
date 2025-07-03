@@ -2,7 +2,7 @@
 
 import { connect, disconnect } from './lib/db.js';
 import Country from '../../model/projects.js';
-import EmailHistory from '../../Models/emailHistory.js';
+import EmailHistory from '../../model/emailHistory.js';
 import s3Uploader from './lib/utils/s3Uploader.js';
 import companyEmailSender from './lib/utils/companyEmailSender.js';
 import EmailTemplate from './lib/emailTemplate/projectEmailfromFreelancertoClient.js';
