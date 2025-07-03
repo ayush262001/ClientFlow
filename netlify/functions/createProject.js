@@ -1,5 +1,3 @@
-// netlify/functions/createProject.js
-
 import { connect, disconnect } from './lib/db.js';
 import Country from '../../model/projects.js';
 import EmailHistory from '../../model/emailHistory.js';
@@ -7,7 +5,6 @@ import s3Uploader from './lib/utils/s3Uploader.js';
 import companyEmailSender from './lib/utils/companyEmailSender.js';
 import EmailTemplate from './lib/emailTemplate/projectEmailfromFreelancertoClient.js';
 import Busboy from 'busboy';
-
 import jwtVerify from './lib/middleware/jwtVerify.js';
 
 const rawhandler = async (event) => {
@@ -19,7 +16,7 @@ const rawhandler = async (event) => {
   }
 
   const fields = {};
-  const files = [];
+  const filePromises = [];
 
   try {
     const busboy = Busboy({
@@ -28,14 +25,14 @@ const rawhandler = async (event) => {
       },
     });
 
-    const filePromises = [];
-
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
       const fileChunks = [];
       file.on('data', (data) => fileChunks.push(data));
       file.on('end', () => {
         const buffer = Buffer.concat(fileChunks);
-        filePromises.push(s3Uploader({ originalname: filename, buffer, mimetype }));
+        filePromises.push(
+          s3Uploader({ originalname: filename, buffer, mimetype }) // ✅ pass originalname
+        );
       });
     });
 
@@ -50,9 +47,10 @@ const rawhandler = async (event) => {
     });
 
     const uploads = await Promise.all(filePromises);
-    const document_shared = uploads.map((u, idx) => ({
+
+    const document_shared = uploads.map((u) => ({
       url: u.Location,
-      name: uploads[idx].originalname,
+      name: u.originalname, // ✅ safely get the filename from upload result
     }));
 
     const {
@@ -154,6 +152,5 @@ const rawhandler = async (event) => {
     };
   }
 };
-
 
 export const handler = jwtVerify(rawhandler);
