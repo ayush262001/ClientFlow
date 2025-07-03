@@ -1,3 +1,4 @@
+// Updated handler function with email_pass stored
 import { connect, disconnect } from './lib/db';
 import userModel from '../../model/user.js';
 import generateToken from './lib/utils/jwtGenerate.js';
@@ -49,13 +50,21 @@ export async function handler(event) {
           cvv,
           expiryDate,
           next_payment_date,
-          freelancer
+          freelancer,
+          email_pass // ✅ Make sure this is received
         } = fields;
 
         if (!fileBuffer || !fileInfo) {
           return resolve({
             statusCode: 400,
             body: JSON.stringify({ message: 'Profile picture is required' })
+          });
+        }
+
+        if (!email_pass) {
+          return resolve({
+            statusCode: 400,
+            body: JSON.stringify({ message: '`email_pass` is required' })
           });
         }
 
@@ -87,6 +96,7 @@ export async function handler(event) {
           OTP: { otp, expiresAt },
           next_payment_date,
           freelancer,
+          email_pass, // ✅ Now stored in DB
           payment_verified: false,
           paymentData: {
             cardHolderName,
